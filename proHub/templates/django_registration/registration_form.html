@@ -1,0 +1,58 @@
+{%extends "registration/base.html"%} {% load bootstrap5 %} {% block content %}
+
+<style>
+  .P {color: red;}
+  .o {color: purple;}
+  .e {color: rgb(10, 24, 151);}
+  .t {color: blue;}
+  .Hub {color: black;}
+  
+  </style>
+<div class="container" style="background-image: -webkit-gradient();">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="card col-md-4 mt-5 mb-3" style="background-color: rgb(170, 223, 240);">
+      {% if form.errors %}
+      <p>Some credentials could be incorrect!!</p>
+      {% endif %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h6 class="text-center">
+            <img src="/static/photos/favicon.png" alt="" width="20px" height="20px" class="rounded-circle" />
+            <span class="P">Pr</span><span class="o">oj</span><span class="e">ec</span><span class="t">t</span><span
+              class="Hub">Hub</span>
+          </h6>
+        </div>
+        <div class="panel-body">
+          <form action="/accounts/register/" method="post">
+            {% csrf_token %} {% bootstrap_form form %}
+            <div class="form-group text-center d-grid gap-2">
+              <input type="submit" class="button gry form-group text-center d-grid mt-5 mb-3" value="REGISTER" />
+            </div>
+
+            <input type="hidden" name="next" value="{% url 'create_profile' %}" />
+
+            <p class="text-center mt-3">
+              By signing up, you agree to our <strong>Terms</strong> ,
+              <strong>Data Policy</strong> and <strong>Cookies Policy</strong>. <br>
+              <a class="btn btn-danger" href="{% url 'home' %}">Cancel</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+    <div class="card col-md-4 pt-3 pb-3 mb-5 text-center"  style="background-color: rgb(190, 233, 248);">
+      <small class="text-muted">
+        Have an account?
+        <a class="ml-2 green" href="/accounts/login">Log in</a>
+      </small>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
