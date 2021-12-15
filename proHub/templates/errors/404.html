@@ -1,0 +1,12 @@
+{% extends 'main/base.html'%} {% block content %}
+<div class="whoops">
+  <h2 class="text-center" id="whooops">WHOOOPS!</h2>
+  <h3 class="text-center text-muted">Sorry, We could't find that page.</h3>
+  <p class="text-center text-muted">
+    We are not quite sure what went wrong. <br />
+    You can go back to our <span><a class="name" style="color: #49c5b6;" href="{% url 'home' %}">homepage</a></span> or check the url to make sure it is correct.
+    <br />
+    Cheers!
+  </p>
+</div>
+{% endblock %}
