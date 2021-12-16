@@ -1,0 +1,141 @@
+{% extends 'main/base.html' %} {% load bootstrap5 %} {% load static %} {% block content %}
+<div class="container justify-content-center">
+  <main>
+    <div class="col-md-8" style="margin-left: auto; margin-right: auto">
+      <div class="card mt-5 p-3 mb-5" style="background-color: #b3d8f1;">
+        <div class="cardbody">
+          <div class="author mb-3">
+            <img src="{{project.user.profile.profile_pic.url}}" class="rounded-circle" alt="user"
+              style="height: 2em; width: 2em" />
+
+            <span style="margin-left: 10px"><a class="puserp"
+                href="/profile/{{project.user.username}}">{{project.user}}</a>
+            </span>
+          </div>
+        </div>
+        <div class="card__image">
+          <a href="#"><img src="{{project.project_image.url}}" alt="image" style="width: 100%" class="image" /></a>
+        </div>
+        <div class="cardbody">
+          <div class="mt-2">
+            <a href="#"></a>
+
+            <time>{{project.pub_date}}</time>
+          </div>
+          <article class="card__article">
+            <h3><a class="dance mb-3" target="_blank" href="{{project.url}}">{{project.name}}</a></h3>
+            <p>{{project.description}}</p>
+            <div class="mt-4">
+              <a class="" href="{{project.url}}" target="_blank"><button class="hov btn btn-outline-dark btn-sm"><i
+                    class="fas fa-share"> Share-it</i></button></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="row">
+    <div class="col-md-8" style="margin-left: auto; margin-right: auto;">
+      <div class="comment_header mb-3">
+        <h3 class="text-center" style="color: rgb(46, 154, 187);"">Sample Reviews</h3>
+      </div>
+      <div class=" comment card p-5" style="background-color: #b3d8f1;">
+          {% for comment in comments %}
+          <div class="comments pb-4">
+            <img src="{{comment.user.profile.profile_pic.url}}" class="rounded-circle" alt="user"
+              style="height: 2em; width: 2em" />
+
+            <span style="margin-left: 10px"><a class="puserp" style="font-weight: 800;"
+                href="/profile/{{project.user.username}}">{{comment.user}}</a>
+            </span>
+            <span class="comment_details" style="font-size: 0.9rem">{{comment.comment}}</span> <br>
+            <span style="margin-left: 40px;">{{comment.pub_date}}</span>
+          </div>
+          {% endfor %}
+          <div class="comment-section">
+            <form role="add_comment" action="{% url 'addComment' project_id=project.id %}">
+              {% csrf_token%}
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Review this Project..." name="comments"
+                  style="font-size: 1rem; border: 0" />
+                <div class="input-group-btn">
+                  <button class="btn name" type="submit" style="font-size: 1rem">
+                    Post
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+
+    </div>
+  </div>
+  {% if not logic %}
+  <div class="row pt-5">
+    <div class="col-8" style="margin-left: auto; margin-right: auto;">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="pb-3 text-center" style="color: rgb(46, 154, 187);"">Give Rating</h5>
+          <form action="" method=" POST" re>
+            {% csrf_token %}
+            {% bootstrap_form form%}
+            <input class="btn btn-primary gry form-group text-center d-grid mt-5 mb-3" style="width: 100%" type="submit"
+              value="RATE" required />
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="row mt-5">
+    <div class="col-md-8" style="margin-left: auto; margin-right: auto;">
+      <div class="comment_header mb-3">
+        <h3 class="text-center" style="color: rgb(46, 154, 187);"">Average Ratings</h3>
+      </div>
+      <div class=" card pt-3 pb-2 text-center" style="background-color: #b3d8f1;">
+          <p>usability average rating = {{usability_rating|floatformat}}</p>
+          <p>design average rating = {{design_rating|floatformat}}</p>
+          <p>content average rating = {{content_rating|floatformat}}</p>
+      </div>
+      <div class="pt-5">
+        <div class="comment_header mb-3">
+          <h3 class="text-center" style="color: rgb(46, 154, 187);"">Individuals' Ratings</h3>
+        </div>
+        <table class=" table">
+            <tbody>
+              <tr>
+                <td><strong>Profile</strong></td>
+                <td><strong>Name</strong></td>
+                <td><strong>Design</strong></td>
+                <td><strong>Usability</strong></td>
+                <td><strong>Content</strong></td>
+                <td><strong>Average</strong></td>
+              </tr>
+              {% for rating in ratings %}
+              <tr>
+                <th scope="row">
+                  <img class="rounded-circle" style="width: 2em; height: 2em"
+                    src="{{rating.user.profile.profile_pic.url}}" alt="">
+                </th>
+                <td>{{rating.user.username}}</td>
+                <td>{{rating.design}}</td>
+                <td>{{rating.usability}}</td>
+                <td>{{rating.content}}</td>
+                <td>{{rating.avg_rating|floatformat}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+{% block scripts %} {{block.super}}
+<script type="text/javascript" src="{%static 'js/awwards.js'%}"></script>
+{% endblock %}
