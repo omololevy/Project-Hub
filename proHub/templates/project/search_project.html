@@ -1,0 +1,56 @@
+{%extends 'main/base.html'%}
+{% block content %}
+<div class="container">
+
+  <div class="row pt-5 text-center">
+    {% if projects%}
+    <h5><strong><em>{{ projects|length }} project(s) found</em></strong></h5>
+    {% else %}
+    <h2><strong>Found 0 projects</strong></h2>
+    {% endif %}
+
+  </div>
+
+  {% if projects %}
+  <main>
+    <div class="container-fluid justify-content-center">
+      <div class="col-md-8" style="margin-left: auto; margin-right: auto;">
+        {% for project in projects %}
+        <div class="card mt-5 p-3 mb-5">
+          <div class="cardbody">
+            <div class="author mb-3">
+              <img src="{{project.user.profile.profile_pic.url}}" class="rounded-circle" alt="user" style="height: 2em; width: 2em" />
+
+              <span style="margin-left: 10px"><a class="puserp" href="/profile/{{project.user.username}}">
+                {{project.user}}</a>
+              </span>
+            </div>
+          </div>
+          <div class="card__image">
+            <a href="/site/{{project.id}}"><img src="{{project.project_image.url}}" alt="image" style="width: 100%"
+                class="image" /></a>
+          </div>
+          <div class="cardbody">
+            <div class="mt-2">
+              <a href="#"></a>
+
+              <time>{{project.pub_date}}</time>
+            </div>
+            <article class="card__article">
+              <h3><a class="dance mb-3" target="_blank" href="{{project.url}}">{{project.name}}</a></h3>
+              <p>{{project.description}}</p>
+              <div class="mt-4">
+                <a class="" href="{{project.url}}" target="_blank"><button class="hov btn btn-outline-dark btn-sm"><i
+                      class="fas fa-share"> Share</i></button></a>
+              </div>
+            </article>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+  {% endif %}
+</div>
+</div>
+{% endblock %}
