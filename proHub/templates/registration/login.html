@@ -1,0 +1,69 @@
+{% extends "registration/base.html" %} {% load bootstrap5 %} {% block content %}{% include "navigation/navbar.html" %}
+<div class="container">
+  <div class="row">
+  <!-- Empty div -->
+  <div class="col-md-4"></div>
+
+  <div class="card col-md-4" style="width: 40rem; background-color: rgb(194, 230, 241);"">
+    <div class="card-body">
+
+      {% if form.errors %}
+      <p>Password or Username is incorrect</p>
+      {% endif %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h6 class="text-center">
+            <img src="/static/photos/favicon.png" alt="" width="20px" height="20px" class="rounded-circle" />
+            <span class="P">Pr</span><span class="o">oj</span><span class="e">ec</span><span class="t">t</span><span
+              class="Hub">Hub</span>
+          </h6>
+        </div>
+        <div class="panel-body">
+          <form action="/accounts/login/" method="post">
+            {% csrf_token %} {% bootstrap_form form%}
+
+            <div class="form-group text-center d-grid gap-2">
+              <input type="submit" class="btn btn-info form-group text-center d-grid mt-5 mb-3" value="LOGIN" />
+            </div>
+
+            <input type="hidden" name="next" value="{% url 'home' %}" />
+          </form>
+          <p align="center">
+            <strong><a class="link-underlined " href="/accounts/password_change">Forgot your password!</a></strong>
+          </p>
+        </div>
+      </div>
+      <div class="pt-3 pb-3 text-center">
+        <small class="text-muted">
+          Don't have an account?
+          <a class="ml-2 " href="/accounts/register">Sign up</a>
+        </small>
+      </div>
+      <div class="box-section mt-4">
+        <div class="header">
+          <h5>Sign in with:</h5>
+        </div>
+        <div class="bts">
+          <a href="#" class="bt-connect google">
+            <img src="/static/photos/google.svg" alt="" height="25px" width="25px">
+          </a>
+
+          <a href="#" class="bt-connect twitter">
+            <img src="/static/photos/twitter.svg" alt="" height="30px" width="30px" />
+          </a>
+
+          <a href="#" class="bt-connect facebook">
+            <img src="/static/photos/facebook.svg" alt="" height="30px" width="30px" />
+          </a>
+        </div>
+        <div class="box-bottom mt-5 mb-3 text-center" style="font-size: 14px;">
+          © 2021 Cotechlevy
+          <strong><a class="link-underlined " href="#">Terms of Service</a></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
