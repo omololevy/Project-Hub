@@ -1,0 +1,17 @@
+From COTECH,
+
+Hello {{name}}, welcome to Project-Hub.
+
+We've seen you join this web app that emulates the operation of the Awwards web app. 
+Feel free to update your profile, post project(s), comment(s), and share projects. 
+Also you should rate idividual projects based on: 
+    * Design,
+    * Usability,
+    * and Content.
+  Feel at home with the app.
+
+  Your honoured Developer,
+  Cotech Levy
+
+Note:
+  If you did not make this request kindly REPORT to cotechlevy@gmail.com immediately!!
