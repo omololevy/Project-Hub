@@ -1,0 +1,38 @@
+{% load bootstrap5 %} {% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Update User Profile</title>
+    {{form.media}} {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    {% endblock %}
+  </head>
+
+  <body>
+    <div class="container col-md-4 pt-5 pb-5">
+      <h5 class="text-center pb-3">Adjust Profile</h5>
+      <form
+      style="padding: 30px 20px;"
+        class="card pt-3 pb-3 new_post"
+        action="{%url 'create_profile'%}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {%csrf_token%} {% bootstrap_form form%}
+        <input
+        class="button gry form-group text-center d-grid mt-5 mb-3"
+        style="width: 100%"
+          type="submit"
+          value="CREATE PROFILE"
+        />
+      </form>
+    </div>
+
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %} {% endblock %}
+  </body>
+</html>
