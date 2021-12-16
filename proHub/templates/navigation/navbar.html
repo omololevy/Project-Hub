@@ -1,0 +1,101 @@
+<style>
+.P {color: red;}
+.o {color: purple;}
+.e {color: rgb(10, 24, 151);}
+.t {color: blue;}
+.Hub {color: black;}
+#a {text-decoration: none;}
+</style>
+
+<div id="mySidenav" class="sidenav" style="background-color: #aeebf0">
+  <a style="background-color: #aeebf0" href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+  <img src="/static/photos/left-arrow.png" alt="" height="40px" width="40px"></a>
+    
+  {% if user.is_authenticated %}
+  <a href="{% url 'home' %}" style="text-decoration: none;">Home</a>
+  <a href="{% url 'new_site' %}" style="text-decoration: none;">Post Project</a>
+  <a href="/profile/{{ user.username }}" style="text-decoration: none;">Profile</a>
+  <a href="{% url 'about' %}" style="text-decoration: none;">About Us</a>
+  <a class="text-muted" href="/logout" style="text-decoration: none;">Logout
+    <span style="margin-left: 110px"><i class="fas fa-sign-out-alt"></i></span>
+  </a>
+  {% else %}
+  <a href="{% url 'home' %}" style="text-decoration: none;">Home</a>
+  <a href="/accounts/login" style="text-decoration: none;">Login</a>
+  <a href="/accounts/register/" style="text-decoration: none;">Register</a>
+  <a href="{% url 'new_site' %}" style="text-decoration: none;">Post Project</a>
+  <a href="{% url 'about' %}" style="text-decoration: none;">About Us</a>
+  {% endif %}
+</div>
+
+<div>
+  <!-- Navigation bar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" style="padding: 0">
+      <div class="" id="header">
+        <span class="menu" onclick="openNav()">&#9776; MENU</span>
+      </div>
+      <a class="nav-logo" href="{% url 'home' %}"><img class="rounded-circle" src="/static/photos/favicon.png" alt="" height="50px" width="50px"></a>
+      <div class="nav-brand">
+     <h3><a href="{% url 'home' %}" style="text-decoration: none;"><span class="P">Pr</span><span class="o">oj</span><span class="e">ec</span><span class="t">t</span><span class="Hub">Hub</span></h3>
+    </div>
+      {% if user.is_authenticated %}
+      <div class="disp">
+        <form class="search d-flex" role="search" action="{% url 'search' %}">
+          <!-- <i class="fa fa-search"></i> -->
+          <input
+            class="text-center form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" />
+        </form>
+      </div>
+
+      <div class="prof collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          {% for profile in profile %}
+          <li class="nav-item drop dropdown">
+            <a class="nav-link dropdown-toggle pinfo" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <img class="img-circle" src="{{ profile.profile_pic.url }}" alt="" width="40px" height="40px" />
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item carta pb-3" href="/profile/{{ user.username }}">Profile</a>
+              </li>
+             
+              <li>
+                <a class="dropdown-item carta pb-3" href="/logout">Logout</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item drop dropdown">
+            <a class="nav-link dropdown-toggle pinfo" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-outline-info" width="40px" height="40px" />Get APIs</button>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item carta pb-3" href="api/profiles">Profile-List</a>
+              </li>
+             
+              <li>
+                <a class="dropdown-item carta pb-3" href="api/projects">Projects-List</a>
+              </li>
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      
+      <div class="regi">
+        <a class="btn btn-outline-info" href="/accounts/login/">Get APIs</a>
+      </div>      
+      <div class="regi">
+        <a class="carta nav-item reg" style="text-decoration: none;" href="/accounts/register/">REGISTER</a>
+      </div>
+      <div class="site">
+        <a class="carta nav-item reg" style="text-decoration: none; background-color: #28bdd1" href="{% url 'new_site' %}">POST PROJECT</a>
+      </div>
+      {% endif %}
+    </div>
+  </nav>
+</div>
