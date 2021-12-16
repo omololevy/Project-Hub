@@ -1,0 +1,72 @@
+{%extends 'profile/base.html'%} {% load static %} {% block content %}
+<header class="mb-5">
+  {% for profile in profile %}
+  <div class="container-fluid cont">
+    <!-- Displaying user profile   -->
+    <div class="card profile" style="background-color: #b3d8f1; width: 40rem;">
+      <div class="bio-profile-image">
+        <a href="">
+          <img class="img-circle profile_img" src="{{ profile.profile_pic.url }}" alt="{{ user.username }}" />
+        </a>
+      </div>
+      <div class="details mt-3">
+        <a class="profile-name" href="/update_profile/{{ user.username }}">
+          <h5 class="heading-medium">{{ profile.user.username }}</h5>
+        </a>
+        <span style="padding-left: 10px"><a class="name" href="/update_profile/{{ user.username }}"><i
+              class="fas fa-pen"></i></a></span>
+        <br />
+      </div>
+      <div class="bio">
+        <p style="font-size: large;">
+          <span><strong>Name:</strong>
+            <em class="name" style="cursor: pointer">{{ profile.user.profile.name }}</em></span>
+          <br /><span><strong>Email: </strong><em>{{ profile.user.profile.email }}</em></span>
+          <br /><span class="bio-text"><strong>Bio: </strong><em>{{ profile.user.profile.bio }}</em></span>
+          <br />
+          <span><strong>Country: </strong><em>{{ profile.user.profile.country }}</em></span> <br>
+          <a href="/accounts/password_change" class="btn btn-info" >Change Password</a>
+        </p>
+        
+      </div>
+    </div>
+    <!-- End of profile section -->
+  </div>
+  {% endfor %}
+  <!-- End of container -->
+</header>
+<main>
+  <div class="container">
+    <div class="text-center mt-5 mb-4">
+      <h3 style="color: rgb(46, 154, 187); font-weight: bolder;">Posted Projects</h3>
+    </div>
+    <hr>
+    <div class="row mt-5">
+      {% for project in projects %}
+      <div class="col-md-4">
+        <div class="card p-3 mb-5" style="background-color: #b3d8f1;">
+          <div class="card__image">
+            <a href="/site/{{project.id}}"><img src="{{project.project_image.url}}" alt="image" style="width: 100%; height: 250px" class="image"/></a>
+          </div>
+          <div class="cardbody">
+            <div class="mt-2">
+              <a href="#"></a>
+
+              <time>{{project.pub_date}}</time>
+            </div>
+            <article class="card__article">
+              <h3><a class="dance mb-3" target="_blank" href="{{project.url}}">{{project.name}}</a></h3>
+              <div class="mt-4">
+                <a class="" href="{{project.url}}" target="_blank"><button class="hov btn btn-outline-dark btn-sm"><i
+                      class="fas fa-share"> Share</i></button></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <hr />
+  </div>
+</main>
+{% endblock %}
